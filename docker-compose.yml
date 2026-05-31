@@ -1,0 +1,48 @@
+# ═══════════════════════════════════════════════════════════════════════
+# docker-compose.yml — AgendaPro
+# Para correr localmente sin instalar PHP ni Node.
+#
+# Uso rápido (una sola vez, sin configurar nada):
+#   docker compose up --build
+# Luego abre: http://localhost:8000
+# ═══════════════════════════════════════════════════════════════════════
+
+services:
+  app:
+    build: .
+    container_name: expo-contenedor
+    ports:
+      - "8000:8080"      # Nginx escucha en 8080 dentro del contenedor
+    environment:
+      # ── Laravel ────────────────────────────────────────────────────
+      APP_NAME: AgendaPro
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8000
+      APP_KEY: "base64:x0VWVseXFquWwzrKoAkUdvtuPNe0Ak/WXNkXNJu5v3s="
+
+      # ── Base de datos PostgreSQL (servidor compartido del grupo) ────
+      DB_CONNECTION: pgsql
+      DB_HOST: mail.tecnoweb.org.bo
+      DB_PORT: "5432"
+      DB_DATABASE: db_agenda
+      DB_USERNAME: agenda
+      DB_PASSWORD: agendaagenda
+
+      # ── FTP (tecnoweb — puede no estar disponible localmente) ───────
+      FTP_HOST: mail.tecnoweb.org.bo
+      FTP_USERNAME: grupo07sc
+      FTP_PASSWORD: "grup007grup007*"
+      FTP_ROOT: /PracticaU4-3SC/LuisFernandoBlancoBautista/uploads
+
+      # ── URL base de fotos (siempre desde tecnoweb) ──────────────────
+      VITE_FOTO_BASE_URL: https://www.tecnoweb.org.bo/inf513/grupo07sc/PracticaU4-3SC/LuisFernandoBlancoBautista/uploads
+
+      # ── Session y cache (file para entorno local simple) ────────────
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+      FILESYSTEM_DISK: local
+
+      LOG_CHANNEL: stderr
+      LOG_LEVEL: debug
