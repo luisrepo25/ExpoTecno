@@ -10,7 +10,6 @@
 services:
   app:
     build: .
-    container_name: expo-contenedor
     ports:
       - "8000:8080"      # Nginx escucha en 8080 dentro del contenedor
     environment:
