@@ -20,7 +20,8 @@ RUN composer install \
     --no-dev \
     --no-scripts \
     --no-autoloader \
-    --prefer-dist
+    --prefer-dist \
+    --ignore-platform-req=ext-ftp
 
 COPY . .
 
