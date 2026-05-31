@@ -24,6 +24,25 @@
   --r:        5px;
 }
 
+.agenda-root[data-theme='light'] {
+  --canvas:   #F4EFE6;
+  --panel:    #FFF9EF;
+  --raised:   #FFFFFF;
+  --line:     #DED6CA;
+  --line2:    #CCBFAE;
+  --gold:     #9A6E22;
+  --gold-l:   #B9893F;
+  --ink:      #1D1A16;
+  --ink-2:    #5D5448;
+  --ink-3:    #857967;
+  --ok:       #2E6F4C;
+  --ok-bg:    rgba(46, 111, 76, .12);
+  --err:      #A33F3F;
+  --err-bg:   rgba(163, 63, 63, .12);
+  --rd:       #5B4FA8;
+  --rd-bg:    rgba(91, 79, 168, .12);
+}
+
 /* ── Reset base ────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -150,6 +169,25 @@
   transition: background .18s;
 }
 .btn-new:hover { background: var(--gold-l); }
+
+.btn-theme {
+  background: transparent;
+  color: var(--ink-2);
+  border: 1px solid var(--line2);
+  border-radius: var(--r);
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: .04em;
+  transition: color .15s, border-color .15s, background .15s;
+}
+
+.btn-theme:hover {
+  color: var(--ink);
+  border-color: var(--gold);
+  background: rgba(196, 154, 60, .09);
+}
 
 /* ── Shell / Layout ────────────────────────────────────────────────────── */
 .shell {

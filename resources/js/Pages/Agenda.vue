@@ -18,7 +18,7 @@
 -->
 <script setup>
 import '../../css/agenda.css'
-import { ref }      from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { router, useForm } from '@inertiajs/vue3'
 
 // ── Componentes ──────────────────────────────────────────────────────────
@@ -37,6 +37,34 @@ import { useFoto }       from '../Composables/useFoto.js'
 const props = defineProps({
   personas: Array,
   filtros:  Object,
+})
+
+// ── Tema visual (dia/noche) ──────────────────────────────────────────────
+const theme = ref('dark')
+
+function applyTheme(value) {
+  document.documentElement.classList.toggle('theme-dark', value === 'dark')
+  document.documentElement.classList.toggle('theme-light', value === 'light')
+  document.documentElement.style.colorScheme = value
+}
+
+function toggleTheme() {
+  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+}
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('agenda-theme')
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    theme.value = savedTheme
+  } else {
+    theme.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+  applyTheme(theme.value)
+})
+
+watch(theme, (value) => {
+  localStorage.setItem('agenda-theme', value)
+  applyTheme(value)
 })
 
 // ── Indicador de carga (barra dorada superior) ────────────────────────────
@@ -141,7 +169,7 @@ function onFotoUpdateChange(e) {
 </script>
 
 <template>
-  <div class="agenda-root">
+  <div class="agenda-root" :data-theme="theme">
 
     <!-- Barra de progreso dorada (visible durante peticiones Inertia) -->
     <transition name="fade">
@@ -162,6 +190,15 @@ function onFotoUpdateChange(e) {
         <div class="topbar-right">
           <span class="status-dot"></span>
           <span class="status-label">PostgreSQL · db_agenda</span>
+          <button
+            type="button"
+            class="btn-theme"
+            :title="theme === 'dark' ? 'Cambiar a modo dia' : 'Cambiar a modo noche'"
+            :aria-pressed="theme === 'dark'"
+            @click="toggleTheme"
+          >
+            Tema: {{ theme === 'dark' ? 'Noche' : 'Dia' }}
+          </button>
           <button class="btn-new" @click="showForm = !showForm">
             {{ showForm ? 'Cancelar' : 'Nueva persona' }}
           </button>
