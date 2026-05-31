@@ -2,10 +2,10 @@
 # Dockerfile — AgendaPro (Laravel 12 + Inertia.js + Vue 3)
 # Deploy: Render.com — 3 stages
 #
-# NOTA: La extensión FTP se omite intencionalmente.
-# En Render (cloud), el acceso FTP a tecnoweb.org.bo no está disponible.
-# Las fotos se sirven directamente desde VITE_FOTO_BASE_URL (tecnoweb).
-# El fallback local de storage funciona sin FTP.
+# NOTA: Se habilita ext-ftp para permitir subida remota de fotos
+# cuando el entorno (local/Fedora, etc.) sí tiene salida a tecnoweb.
+# Si FTP no estuviera disponible en algún entorno cloud, el controlador
+# mantiene fallback a storage local.
 # ═══════════════════════════════════════════════════════════════════════
 
 
@@ -68,6 +68,7 @@ RUN apk add --no-cache \
         pdo \
         pdo_pgsql \
         pgsql \
+        ftp \
         mbstring \
         zip \
     && rm -rf /var/cache/apk/*
