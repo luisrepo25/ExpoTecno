@@ -14,8 +14,11 @@ node_modules
 tests
 phpunit.xml
 
-# Docker mismo (no recursivo)
-docker
+# NOTA: docker/ NO se excluye — el Dockerfile copia desde esa carpeta:
+#   COPY docker/nginx.conf ...
+#   COPY docker/supervisord.conf ...
+#   COPY docker/start.sh ...
+docker-compose.override.yml
 
 # Editor / IDE
 .editorconfig
