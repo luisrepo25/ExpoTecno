@@ -1,0 +1,34 @@
+# Node — se instala en el stage de build, no en producción
+node_modules
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Entorno local
+.env
+.env.local
+
+# Tests
+tests
+phpunit.xml
+
+# Docker mismo (no recursivo)
+docker
+
+# Editor / IDE
+.editorconfig
+.idea
+.vscode
+*.code-workspace
+
+# Logs locales
+storage/logs/*.log
+
+# Build artifacts locales (se generan en el stage de build)
+public/hot
+public/storage
+
+# Documentación
+README.md

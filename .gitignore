@@ -1,0 +1,67 @@
+# ════════════════════════════════════════════════════════════════
+# .gitignore — AgendaPro (Laravel 12 + Vue 3 + Inertia + Docker)
+# ════════════════════════════════════════════════════════════════
+
+# ── Entorno y secretos ───────────────────────────────────────────
+.env
+.env.*
+!.env.example        # sí subir el ejemplo (sin valores reales)
+auth.json
+*.key
+/storage/*.key
+
+# ── Dependencias ─────────────────────────────────────────────────
+/vendor
+/node_modules
+
+# ── Build de assets (Vite genera esto, no versionar) ─────────────
+/public/build
+/public/hot
+/public/storage      # enlace simbólico de storage (se regenera)
+
+# ── Cache y compilados de Laravel ────────────────────────────────
+/bootstrap/cache/*.php
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/storage/pail
+
+# ── Logs ─────────────────────────────────────────────────────────
+*.log
+/storage/logs/*.log
+
+# ── Tests ────────────────────────────────────────────────────────
+.phpunit.result.cache
+/.phpunit.cache
+
+# ── Editores e IDEs ──────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.fleet/
+.nova/
+.zed/
+*.swp
+*.swo
+*~
+
+# ── Herramientas Laravel locales ─────────────────────────────────
+Homestead.json
+Homestead.yaml
+.phpactor.json
+.sail/
+
+# ── Docker (los configs SÍ se suben, los datos NO) ───────────────
+# docker/         ← SÍ versionar (nginx.conf, supervisord.conf, start.sh)
+# Dockerfile      ← SÍ versionar
+docker-compose.override.yml   # overrides locales opcionales
+
+# ── NPM / Node ───────────────────────────────────────────────────
+npm-debug.log*
+yarn-error.log
+
+# ── Misc ─────────────────────────────────────────────────────────
+*.bak
+*.tmp
+.cache/
