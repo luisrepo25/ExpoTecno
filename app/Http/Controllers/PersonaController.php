@@ -174,8 +174,9 @@ class PersonaController extends Controller
                 Storage::disk('ftp_tecnoweb')->put($nombre, file_get_contents($archivo));
                 return $nombre;
             }
-        } catch (\Exception $e) {
-            // FTP no disponible → fallback a storage local
+        } catch (\Throwable $e) {
+            // FTP no disponible o ext-ftp no cargada → fallback a storage local.
+            // \Throwable captura tanto Exception como Error (p.ej. FTP_BINARY undefined).
         }
 
         $stored = $archivo->store('fotos', 'public');
