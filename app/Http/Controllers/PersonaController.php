@@ -70,10 +70,6 @@ class PersonaController extends Controller
             )
             ->limit(100)
             ->get();
-
-        // Inertia::render() detecta si la petición trae X-Inertia: true.
-        // → Si SÍ: responde con JSON  { component, props, ... }  ← AJAX
-        // → Si NO: responde con HTML completo                     ← recarga clásica
         return Inertia::render('Agenda', [
             'personas' => $personas,
             'filtros'  => ['buscar' => $buscar],
